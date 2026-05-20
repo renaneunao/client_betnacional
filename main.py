@@ -1,0 +1,80 @@
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel
+from typing import List
+import logging
+from dotenv import load_dotenv
+
+from betnacional.client import BetnacionalClient
+
+load_dotenv()
+
+app = FastAPI(title="Betnacional SDK API", version="1.0.0")
+
+# Setup logger
+logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(name)s - %(message)s")
+logger = logging.getLogger("betnacional.api_server")
+
+# Initialize client lazily
+client = None
+
+def get_client() -> BetnacionalClient:
+    global client
+    if client is None:
+        logger.info("Initializing BetnacionalClient in API server...")
+        client = BetnacionalClient(headless_scraper=True)
+        # Perform initial login
+        if not client.login():
+            logger.error("Initial login failed during API startup.")
+            raise HTTPException(status_code=500, detail="Failed to authenticate with Betnacional")
+    return client
+
+class BetChoice(BaseModel):
+    match_id: str
+    choice: str  # "casa", "empate", "fora"
+
+class BetRequest(BaseModel):
+    choices: List[BetChoice]
+    stake: float
+
+@app.get("/")
+def read_root():
+    return {"status": "ok", "app": "betnacional-client-sdk"}
+
+@app.get("/balance")
+def get_balance():
+    try:
+        sdk_client = get_client()
+        balance = sdk_client.get_balance()
+        return {"balance": balance}
+    except Exception as e:
+        logger.error(f"Error fetching balance: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/matches")
+def get_matches():
+    try:
+        sdk_client = get_client()
+        matches = sdk_client.listar_jogos_rodada_brasileirao()
+        return {"matches": [m.model_dump() for m in matches]}
+    except Exception as e:
+        logger.error(f"Error fetching matches: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/bet")
+def place_bet(payload: BetRequest):
+    try:
+        sdk_client = get_client()
+        choices_dicts = [{"match_id": item.match_id, "choice": item.choice} for item in payload.choices]
+        
+        result = sdk_client.multipla_rodada_resultados_brasileirao(
+            choices=choices_dicts,
+            stake=payload.stake
+        )
+        return {
+            "success": result.success,
+            "bet_id": result.bet_id,
+            "message": result.message
+        }
+    except Exception as e:
+        logger.error(f"Error placing bet: {e}")
+        raise HTTPException(status_code=500, detail=str(e))

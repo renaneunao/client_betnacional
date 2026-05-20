@@ -22,3 +22,6 @@ mitm_capture/captured_flows.json
 # IDE settings
 .vscode/
 .idea/
+
+# Scratch and debug scripts (not needed in production)
+scratch/

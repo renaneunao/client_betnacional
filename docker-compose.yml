@@ -1,0 +1,22 @@
+services:
+  betnacional-client:
+    image: ghcr.io/renaneunao/client_betnacional:latest
+    container_name: betnacional-client
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:8001:8001"
+    env_file:
+      - .env
+    environment:
+      - PYTHONUNBUFFERED=1
+    networks:
+      - betnacional-net
+    # Playwright requires shared memory
+    shm_size: "512mb"
+    # Run as root to allow Playwright to install browsers at startup if needed
+    user: root
+
+networks:
+  betnacional-net:
+    name: betnacional-net
+    driver: bridge
