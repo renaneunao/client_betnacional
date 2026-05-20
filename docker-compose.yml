@@ -1,6 +1,6 @@
 services:
   betnacional-client:
-    image: ghcr.io/renaneunao/client_betnacional:latest
+    image: renaneunao/client_betnacional:latest
     container_name: betnacional-client
     restart: unless-stopped
     ports:
