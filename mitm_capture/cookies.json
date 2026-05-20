@@ -1,0 +1,424 @@
+[
+  {
+    "name": "taboola_session_id",
+    "value": "v2_de70d0fbb21fb22adc0785423fd230f7_c4a52536-10c0-4f70-b3aa-06a9d3ad78e2-tuct1107b546_1779314651_1779314651_CNawjgYQ06FfGJXdq7vkMyABKAMwHzjb1AdA8YcQSMi65wNQ7dEEWABgAGicx9TZ8KTxqnFwAYABAIgBAA",
+    "domain": ".taboola.com",
+    "path": "/betnacional-br-network/",
+    "expires": -1,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "AUTH_SESSION_ID",
+    "value": "YjM1Mzk0ZGEtZGY0NC00YTBiLTg3NDMtZjA1M2Q2Y2ZlOTc2LlFPWWJrTkltQXEzWjFNWkUxbURDb0hZV0RoYlc0RjdxVlFwaER2cmIyWWRfTURWckYzak43cHFqbnRNbFZZOVFDXzRoSGxGSkhFb0lWdmVHNldfa2Jn.node_214786",
+    "domain": "auth.betnacional.bet.br",
+    "path": "/realms/betnacional/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "KEYCLOAK_IDENTITY",
+    "value": "eyJhbGciOiJIUzUxMiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJhYWE0ODNmMi0xNjliLTQ5MWItYjYyYy1jZWEwNjE2NmM1NzUifQ.eyJleHAiOjE3ODE5MDY2NDMsImlhdCI6MTc3OTMxNDY0MywianRpIjoiNjliMDkzMzAtOTI2MS03MjdhLTQ0YTctZDhhNDY0Mzg5MzYxIiwiaXNzIjoiaHR0cHM6Ly9hdXRoLmJldG5hY2lvbmFsLmJldC5ici9yZWFsbXMvYmV0bmFjaW9uYWwiLCJzdWIiOiJmOmRmMWQ2OGVmLThhMDctNGNhYi05OTA5LTRiOTY1Mjk4Y2UyMToxNDY4MjAxNyIsInR5cCI6IlNlcmlhbGl6ZWQtSUQiLCJzaWQiOiJiMzUzOTRkYS1kZjQ0LTRhMGItODc0My1mMDUzZDZjZmU5NzYiLCJzdGF0ZV9jaGVja2VyIjoib05fdlBwUnBDMzZQTXpRMVBGUG1LeTZxSzdJSG9aa04yWTkweDVqNWx5ZyJ9.39DoUqn5U6vlDPGvPtwvF_0trX95-a23keDgNUsEe86dQDIPO9TfEa25t4XoYgwNsv6dtJFxvLmcXoe3Rjc3uA",
+    "domain": "auth.betnacional.bet.br",
+    "path": "/realms/betnacional/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "KEYCLOAK_SESSION",
+    "value": "_EsgjktDp1qUDpXETnYdlUiybsytdu91wFr-BwZtpT0",
+    "domain": "auth.betnacional.bet.br",
+    "path": "/realms/betnacional/",
+    "expires": 1781906643.327141,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "next-auth.csrf-token",
+    "value": "389804b9270f73abbdb7f8c64e9f5115478d3fccd873cb48a8f634dba0559db3%7Cbf9ac334e446cfbf38886d5edb8d72d0bd594eb30dcafc09fbac60d708a6ac1a",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "GTM_last_click_attribution",
+    "value": "%7B%22source%22%3A%22(direct)%22%2C%22medium%22%3A%22(none)%22%2C%22timestamp%22%3A1779314614.038%7D",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1779919414.042005,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_tguatd",
+    "value": "eyJzYyI6IihkaXJlY3QpIiwiZnRzIjoiKGRpcmVjdCkifQ==",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1779316451,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_tgpc",
+    "value": "1c79a1a2-24ed-4da9-86e2-1b4e8f92a33a",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1810850651,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_tgidts",
+    "value": "eyJzaCI6ImQ0MWQ4Y2Q5OGYwMGIyMDRlOTgwMDk5OGVjZjg0MjdlIiwiY2kiOiJmYjViM2I2MS00ZGFhLTRmZmMtODhlMi1mYWFlMjg3ZjRiYTMiLCJzaSI6IjViOGFjN2U3LThmZGQtNGQ4MS05OWJiLTAzNTFkNGNhMTdlYSJ9",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1779316451,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "user_unic_ac_id",
+    "value": "9af9f835-85e3-b0c2-635f-f80df8808f43",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1781993018,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "advcake_trackid",
+    "value": "9a7e1458-008d-5efa-5d83-415c0da4aa5d",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1781993018,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "geid",
+    "value": "03010029-f8b8-4a75-af00-1a966a0e2fbd",
+    "domain": ".trafficguard.ai",
+    "path": "/",
+    "expires": 1810850655.577388,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "next-auth.callback-url",
+    "value": "https%3A%2F%2Fbetnacional.bet.br%2F",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": -1,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "CookieScriptConsent",
+    "value": "{\"bannershown\":1,\"action\":\"accept\",\"consenttime\":1721081768,\"categories\":\"[\\\"performance\\\",\\\"functionality\\\",\\\"targeting\\\"]\"}",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1781906625,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_gcl_au",
+    "value": "1.1.1437494979.1779314626",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1787090625,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ga",
+    "value": "GA1.1.461264671.1779314617",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1813874625.819015,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ttp",
+    "value": "3E0TkAaJZUbZXxg4LcSsAUeDtMR",
+    "domain": ".tiktok.com",
+    "path": "/",
+    "expires": 1813010652.433737,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "IDE",
+    "value": "AHWqTUlXMmrkmuVMh5glQWve481zDBd25iCajgfmxoasId1dFL-TjoDrZwY_m0QGtaU",
+    "domain": ".doubleclick.net",
+    "path": "/",
+    "expires": 1813874626.472368,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "AMP_MKTG_1a16f56e61",
+    "value": "JTdCJTdE",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1810850627,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "MgidSensorHref",
+    "value": "https://auth.betnacional.bet.br/realms/betnacional/protocol/openid-connect/auth?client_id=betapp&scope=openid%20profile%20email%20betapp&response_type=code&redirect_uri=https%3A%2F%2Fbetnacional.bet.br%2Fapi%2Fauth%2Fcallback%2Fkeycloak&state=m5YVpQ6ONxrU5LR0jQEe0ZagL4p5UpgkqxebBjGUT7c",
+    "domain": ".auth.betnacional.bet.br",
+    "path": "/",
+    "expires": 1787090629,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "t_gid",
+    "value": "c4a52536-10c0-4f70-b3aa-06a9d3ad78e2-tuct1107b546",
+    "domain": ".taboola.com",
+    "path": "/",
+    "expires": 1810850753.097626,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "t_pt_gid",
+    "value": "c4a52536-10c0-4f70-b3aa-06a9d3ad78e2-tuct1107b546",
+    "domain": ".taboola.com",
+    "path": "/",
+    "expires": 1810850753.097879,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None",
+    "partitionKey": "https://betnacional.bet.br",
+    "_crHasCrossSiteAncestor": true
+  },
+  {
+    "name": "_ttp",
+    "value": "01KS3PN7E4PCSH8XPZGWF6NMVZ_.tt.2",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1813010656,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_fbp",
+    "value": "fb.2.1779314630210.399471174631160141",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1787090752,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "muidn",
+    "value": "q4kPIFKpSN3f",
+    "domain": ".mgid.com",
+    "path": "/",
+    "expires": 1810850754.095965,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_tglksd",
+    "value": "eyJzIjoiNWI4YWM3ZTctOGZkZC00ZDgxLTk5YmItMDM1MWQ0Y2ExN2VhIiwic3QiOjE3NzkzMTQ2MTgwMjcsInNvZCI6IihkaXJlY3QpIiwic29kdCI6MTc3OTMxNDYxODAyNywic29kcyI6ImMiLCJzb2RzdCI6MTc3OTMxNDYzMDg3M30=",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1810850651,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "next-auth.session-token.0",
+    "value": "eyJhbGciOiJkaXIiLCJlbmMiOiJBMjU2R0NNIn0..aikge-Lg0lARvgMi.RNLwDftzwphPtD-tt_GL9Mv6UT9ZR4qCCKljZnDfInQm5AFoyAFWUSDkH1jiqBlCmYroyRLXhiEJaARkrR1OGAQbFhLPv1EZUxxptz1zqH0m4JtHQIx_WBCvN7HZlrgsaBOnZWRlP7yiVpZGmV0vyCPhPejl77dQVvT8k9ZVXeRFV3-N1t1nZ44R9q0JB-yNKh-S6T1lU4z3evpk6KZ8IBdTHRzt7ShILe-Se4OKBCdQWFEoD5yVTEizfoFwuvfPQxVpeuBLhgbpr3iUlwqhI9OmI0NErhrqlE-Q1_Uc954QvlxdDybr-8PhoTGTg9paYHm-bb0apevhKO8d_7LwDpxhBUfAwIlE_Xd6KdaczYRiLi6rQ2KZiQvcvrZM1ithuj0ZXsXsyUCA3FrxpYFvCt3m4PPZm2-UqKLmt7dj7ykqMvoM72CcP2GjcVtLGVf3QCzKWQGrWsYG3S7warnp4sPdlguLioZiPRtfzOyTXAktgX42I94T_XA2Cy_pOQoFNfiydJvp8ZCqqAQDV7l_dcT7kMkMR8cMQ4L2XtAW7PvqZ-1LlAuF9AUvEoKHbcSJH4-2aIhYVZ23InkWNsAEEKw53b6KUPAFuFWAxufoyF9TYCV2xCv0_XZulAIvDJFeXkZ3ObRLfjMpyclpwySfscy7vvUZ8rNchCNJkABqiB4o8tuIj6O2Re6x_7TcewiCxVYMuQh3Lm4C6Z62nguwLvjQsGz45001HKVeg_MOx6F8Q0MrZIqEir4Z06O7WE3n6u01BZXvPapjoviMr_WhYkD7RoqSVOW-4KaL7x4XwMDJFeJVw__sHtfXjnD24lgaDj2EZEYO2oXiSrHvZI7U0nU5C8vVlTraM9oPxqphWcrJJxxVOYFsZ1pEOzQB1HOj5P4T3pO-IkWfQmCsyzcoL24XszlJ14eTHirke6rexedkwHbvtFid3UuJma9auhkyCR9NIKPHxwz4n0Xi1mFXBAaJkO9g1Sm23QY1BlyKpeW7FazA2vh0-S2u1jIgwItmneUETnJYVj8BFaA2hquw8WlPMTLOLB_rui5L3pS2hxJBKgscNiKg4diwTSqUvyMy8HNNGAF3ErEvCrW7itKnPaPerra6zxQu5NTM23LyH7A5X84NgTqVb6oL8TWeu3wjnY_SGAlslkwapitxgs4T2y_y_YdX1tjGp31rZrLik-6g7KT96wK_n-Uzkdk8WjZXhvwuxBhcsA51043p50i_mf2cQoFVPF9FYd-arh67qR3dMLRR9wpI_DP9t3EhcTf3Z6xCwBtsN0dBmNWSJCfRWCCRCjdc3YaZmmxg1meYPXWJ8WfY8o6Jqrg6JOFVfEcCEzICryFpb7Jr4dDLog-519prqdv7ARJ0FHi48_bMe5GzRcdKiALJVddMrRVoRCyt3nNYEJ3dd6DEYknuH38XyFxTG4wCfi5e5tHdgSL6yIfcgLCcks50cRxI4b7sgF0DWSJPX5aPdgtVsTcDhfiBhw2m-AKS9FcHucRFw3hPXHuinFhYEfmxnu9SUDrX_69uWUVj44IxdN7YMPW6CcHwh9c0RPVs_a-tbiYPumIv6wF2dweQcJQl5YkcGE6RtKW78pMR6LGDBlNsFbUypiEvbk_D-F0GL447jnK6QQ7gACebx6c5YBrhf7NtuYyr5GMP2gFgxel9RiMIjXwtjShc1LZJk-gEDcOq6-E8OeXe8iQbsPPnFzqinQQMC6aHORkZWIZxNC3LdPoHE8E_cMtPT-M2NLEfBTZj_NIyVtq2b1l4M0_zCcAdJHQ4xuJD1mv62jW7eth5PMPc7e56PNc7oZIlQ3fsoITyvkE0mu8dLW4dwF95pVSGm-D2SLQ2R2IJCOr48NL5eXpKCcudjHNteaMxhMB9h-MopzTiMsbL144_-Jv8Hl0eJkj0UFIwU90CuoeyOguaLjyo8C4MM-4juzkojmJ4BcavMTMwmINZhqb2HhBPMRL663YT6xMa3pJQraRP3VtsWiifKjN52g11qy3AuPVIXiDGuGqrmwXrZ7JmjH_QrQrMy-0Q63aOJlpcuJ9uK0kCJj5skYK2ITdETy0QpHU7PuJV7vmhdTIWfEyPJh8PH05Ar5MCJQ6CcCa_utp8AntpIBIVL14PUYPqX5ug0bHVPz6O_q36fsmdVBVgUKYaUueR2y27bNiHvxwwd3JZYrKLLFBHgEcBD9ImV_2X6SIGFx86E0d3kzDTVKhzBH48WNNEMbXKQhINkFwj_1GkeHtycbC2dd8h2dDED8EAm5xRgqEjwEnhPvNHhzEV1StPGxQaeVHGh9VbjqXe2j_O0vWaqmVyOu8GY_8K2r78rBqb2t_4DDS69oK_R9Wbh_k8tzWIMVodOQUO1RPC89gza3L7TB_8vjorphWNbLJzikLRYlI7J9OkXxzoR3t-dzEyu94OFIDQhHsMTHSwPEHlzoeirSwNyNTB9VNxtgCUhoDeM-dWyFkAu59Xd6Vq4hCoiA3arwgQiWflldVU2oEYy9qszF_JMsnWuKG2BIcsQIs9YOqiLiSjq6NxTaC8LZGyJ96rozzYIYDjfKtihs_eF5eKIWQL2L-tPF3Axmfycx9F9WYoHINkqQB3Fr_pPzKyb_Xr_DCcdbDmes2KXhbd1yJmaPfEevtV22RsXLH3-DhC2o9bhyYhlfY1wXXn02gI77rpU4d3SXajn-w4dP5bghZXaX6v112Vk9chOGVEXpJNKDewGsBhTfp5NhQsUVCL71TQsPVhm1A-9DQ_Fho64KXog53iik2BRFqXXMqiJcg04FBtgDIx2mSkEPcHr-aRVRXeOjRURsQvLbDRsbtqrdWJXW8dm05HBl6mi6pqcIaPrUYkxjg6KGwC_HTO8AQ-6hvo256CQCgp1ECKDc6vcG7dkYd85mmN1W8yzky6pdjeSwzSPc55hnIlVkcBJLQBKPkOfNUi40UL_Az0EkLfGmsm58o-MGa-Gpsgg3_ml7uapZTn9qdiLwZGLnB-K7oL5gUnTOx46dIX3vQhrdpAQHEs5Xpsy8ShCH5KrMo-_ypdRBtf0sm3TlXNIVtSYXbqh0PTfyMSjlztP5f4GQg5c0YpvdZyQCw3EPo6tomHs_QQPOCgbMS2TSkPGbJuZji9rX8mn5wxvpPGshikSyiNSEGuHtnG6WxRBKin7d49SuDWka6xq2IfF5B_GR1P3JY04f0R1fHdst8sy3T99A27hxlTcr-oYrd87wMuEzRn7aA6cNWedg3fTradcE8L23KQonW7dIGkoSKpzoAC2rMv8prXZjsUdmaRJZmSroKfEZLhyX-nUjwsvASG0zD1XOmA7NCkUdvG1QgKs39m0qvWIrhPF3o6NtXfJ7m9co2xbNBqfmLFiX8HZvOFmJy70aiFdLCqC4VaF4yuV_5CdTPHO8BoK95ZOT-wvYqF_FBl3wLWP7aDzPqYTu2OO67FCQszPWxUWxxXijaxBFUL2AeHAxM_vvJyY8JB6oCIqxWjBVlD1ePDFAYL4Uu0K_vzXFbco1EeH6xcxYO-wkOnqH4beHk_hEFBl4u3aKebo9JruKNrsp3q3I01D3Jrs_6_yIWaPFcQBaHbHYCljnUAJvpYFEBI6dl3LPbwDLn3tHpvsRlr_sXlugqUeZ8pyUgjjBU1vS2-ZbEibWeugvLuA7yGtNva6g_3NQbIyxMin4QuVTFPGWj6pnL3ZUtV3g5rhmj-ZC-nnW4UuFdVTW8hwuJWbd7rMehFsiLsOHZqvJAdD5S0onV7A5VTGT6AGBDz00Vvo1fkGTDGfACNIfhS_UZcezgq1dSjjOn4NasuEgLAxibwNmXy52bYmAJQc9OaIV5gNbxWg1--5JnaEPuy5VxeTFqqb3QyV1ArC4aqOUGnI120EX2vSZA",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1781906644.881436,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "next-auth.session-token.1",
+    "value": "tUvHIGARWN1eyQMTPPIqNCdF3iRRiNDr1ODiPQfaE9q3QKC4BLLqBVvkrRkf1c35-hqaoo8chwo81KPcPzkQvROO1uZFS51xLvGi9v8kbckK5gQZQbFY00r3bHvFGH_aD1EOeQafP5p-ZKeFzW47M6PHXgQNxFwkRYQZW18XdwIjro8oflMUtZHSq8cFn1S0qLKdCvVxKZLftvrW1p1xjaNNa8M0L6NrfBc-Jp1TDfpVlOoVZS9QZnI5PRyYwFHMsKJl_GvL6rTvKVsU9BLBsLGRFW_1Jd1nEFU4ViMQ2BkoqKtDTLQFyiIgOEREEwwPQuAjs4WooU77AenVK4wRmC0NhKuw36i7-AYOeM_dwXB2kmzJWzqB88Gkb47xhQ3MIGkbznBIaQD-nzB1lGlt2sRDmzaKYNRUYA1Eu2q67D6MJ4Cu8rwiUykuVLX9HvjFDQ04HHMRUnUVhJ4i41ALmYWfyxpfBpMbGRn4V50mv8Yk9GcSnc4_nsF90bth2Nf73tL-cmj-DoVYLYLnuE-FgXI8JnbMSXsU9SEtg4SRD1mKDnYKxG77XR2SMDYp-5x6494AAA_Bqeex5oGpnqw96x3ORgECAk2KAHMVTomea6DuQ8TxNbmCm6cNu8MYv9h81ng7UYluUh7cam99zykRNGc38OS77YdrwARBBZQDD-W77nIInEwZDPGq42Ou9urCL1ebvmP7JKFv6pEwx6UkP-XU9Uzu7yFUv5XWy6NQ0Hx_dWI2J_KDkV9ogLZ6NDB_ZEvmtlu9O8FWZW_fKAjo_vnCwbpTrq20jUVPPAepLjaVLV3QOIg4GcpuH94i81hCtgd4F2R5QxbM14s6OBAU13TfZblLfSe70t-HGcZSLYJ1a1vSM037mPvlSOb5EApOcOdNGZvC3KCstGHJHrbnVZcepniq92wjwKy35ktORvEupwKitcAIc7HnkLJD1fg7zRdzf0u3k8YrGcK-d2UeaMvE24ZaEagLm4h6vf6ztM_Ja6BwtP7d1cmZI9rltdD6f7mFEFWmMTCXBdTrwbw4e9-su5TH4qjZOmfDjv5s8sBJIYuUVdFmW9iFTlp5mNJzLEjCfUb4lrVpNYx1iYLmdpki3NJO3aPp9_yEJlPreKK_GD7XVw10sgbCRct-Ep3FUPcpwZdBLwD_vvUrlX1nMmusKztx-gXaXD7LQhtV9DDZ0lWW9ZMaOTzuGkG-46YdSPIt9YRbsXHdyYqwPQV8I_UAryqPGmsYyWfnDyrlI5sXv0qJDyb6g7su8WgAdAAkRkqiL2EUoTAFm25SttKDsSSsDD6_QE4b35KeS0tLQmxR7O7w9podk8Ci4TnABxQ9r-J-CnaB6k2tEiFuRHm_B_KZ3il06sLiPV4Bh9-Zlzxo2Yw-Snmh1ckxblyhNJY5IbdHa9vk0zd9ewVoFw2jQbqQ0UrPbNEv-kT90O_GtzTqh6PCYJTjprSqpbQCwDvIVJ3AhsBbNFOgbufSMHbCaBVj1LvGUM9fh0LACDyjCvuY4Ul9aHi4xqWn25rnxMxAQ8c8JmcgoKwNBM0jl5v7yY8kxZwfAQRvFvXW6rZWGgPs-CFtD8kh_89pI4zTuxhq1dUuE6iIQ1PGFKmzVwIORVLmRrYYQOAuv2faZSq8aQ6E5NCKG3KxDSqic-rqnamjHcicub29CCOEdbPLv7Yaz0cawolBkCFg0qBwOULm4TJcA5vH6Tq4-N2gZ79HDCdI6Ic-69Z0BTFW6yYlOywZ_De-gxiBMIPEkOQjxmrXDOn0oE3_ZDZxiWYNFdEcHjLNaSl9TyhIAlU3_8ZRTNOqXeXc5iT99bShstepME0YmjvFPzpA7pQqYlpdaKcT4AfaiudeldPBhKx40v2505oyEPc3f-gL3oMPYRIFN9eC2UhG6UB8YgdpWKiNMlxtMlTArGwteqWSC70NFIQltXLeYMuWtyhV_cdHl-OFGvHdHyKDzoKTPHGrzaxJIRPJ4wqDg3GWqGaajpPJTrETsT2uXPjnv6MBHn794CPKw_DIhJa1Eaw_ZbbADxCUy5UGg0ex6jg4i8E85tAAC4ngjqsnRjFdsmXWEDllSDXYwXH678h0_haZLJlnZv-4.yj9PBurGTKWJDoU26gMsPw",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1781906644.881898,
+    "httpOnly": true,
+    "secure": true,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "nsx_uuid",
+    "value": "14682017",
+    "domain": "betnacional.bet.br",
+    "path": "/",
+    "expires": 1779315545,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "nsx_am",
+    "value": "{%22email%22:%22renan_vianna7@icloud.com%22%2C%22country%22:%22brazil%22%2C%22phone%22:%2216996344668%22%2C%22name%22:%22Renan%20Barbosa%20Silva%20Vianna%22}",
+    "domain": "betnacional.bet.br",
+    "path": "/",
+    "expires": 1779315545,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_hjSessionUser_6403203",
+    "value": "eyJpZCI6IjNlMGIwMjM3LTU1ODAtNTlmOS1iMjllLWZiYmIyYTEwMzNkMCIsImNyZWF0ZWQiOjE3NzkzMTQ2NTU1NDcsImV4aXN0aW5nIjpmYWxzZX0=",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1810850655,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_hjSession_6403203",
+    "value": "eyJpZCI6ImI1MDk1NDc1LWQ5YzAtNDgwOS1hMGE1LTJmMjk3ODk2YzQ1NSIsImMiOjE3NzkzMTQ2NTU1NTAsInMiOjAsInIiOjAsInNiIjowLCJzciI6MCwic2UiOjAsImZzIjoxLCJzcCI6MX0=",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1779316548,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_tgsid",
+    "value": "eyJscGQiOiJ7XCJscHVcIjpcImh0dHBzOi8vYmV0bmFjaW9uYWwuYmV0LmJyJTJGXCIsXCJscHRcIjpcIkJldG5hY2lvbmFsJTNBJTIwQXBvc3RhcyUyMEVzcG9ydGl2YXMlMjAlN0MlMjBCZXRuYWNpb25hbCUyQyUyMGElMjBCZXQlMjBkb3MlMjBCcmFzaWxlaXJvc1wiLFwibHByXCI6XCJcIn0iLCJwcyI6ImM2YjgwOWQyLWVmYzUtNDUzZi04NWIzLTgxY2JmODAzNjI2NSIsInB2YyI6IjMiLCJzYyI6IjViOGFjN2U3LThmZGQtNGQ4MS05OWJiLTAzNTFkNGNhMTdlYTotMSIsImVjIjoiNSIsInB2IjoiMSIsInRpbSI6IjViOGFjN2U3LThmZGQtNGQ4MS05OWJiLTAzNTFkNGNhMTdlYToxNzc5MzE0NjIzNTA4Oi0xIn0=",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1779316456,
+    "httpOnly": false,
+    "secure": true,
+    "sameSite": "None"
+  },
+  {
+    "name": "_tt_enable_cookie",
+    "value": "1",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1813010656,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "MgidSensorNVis",
+    "value": "2",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1787090752,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "MgidSensorHref",
+    "value": "https://betnacional.bet.br/events/1/0/325",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1787090752,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ttcsid_CQKHGN3C77U9D840LHHG",
+    "value": "1779314656259::Z02oOQKEPowD8lEZ3EMs.1.1779314751688.1",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1813010751,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ttcsid_CTG7V7JC77UF4VSQPCS0",
+    "value": "1779314656247::TEi3zb1TJ6wzi9MeFD6g.1.1779314753888.1",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1813010753,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "ttcsid",
+    "value": "1779314656249::jzOWX-HgoSeGXBjNrrpq.1.1779314753888.0",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1813010753,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "AMP_1a16f56e61",
+    "value": "JTdCJTIyZGV2aWNlSWQlMjIlM0ElMjI1YjUzYTRlMi03MzRkLTRmM2QtOTAyNC1jOGQ5ZTUyYWFlZWIlMjIlMkMlMjJ1c2VySWQlMjIlM0ElMjIxNDY4MjAxNyUyMiUyQyUyMnNlc3Npb25JZCUyMiUzQTE3NzkzMTQ2MTEyMzclMkMlMjJvcHRPdXQlMjIlM0FmYWxzZSUyQyUyMmxhc3RFdmVudFRpbWUlMjIlM0ExNzc5MzE0NzU4Nzg4JTJDJTIybGFzdEV2ZW50SWQlMjIlM0EzOSUyQyUyMnBhZ2VDb3VudGVyJTIyJTNBMCU3RA==",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1810850758,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ga_ESE7YZMNJ8",
+    "value": "GS2.1.s1779314613$o1$g1$t1779314761$j60$l0$h0",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1813874761.255565,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  },
+  {
+    "name": "_ga_F0VBPLLSTG",
+    "value": "GS2.1.s1779314617$o1$g1$t1779314761$j52$l1$h134389940",
+    "domain": ".betnacional.bet.br",
+    "path": "/",
+    "expires": 1813874761.270696,
+    "httpOnly": false,
+    "secure": false,
+    "sameSite": "Lax"
+  }
+]

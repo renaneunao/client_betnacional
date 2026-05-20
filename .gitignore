@@ -1,0 +1,24 @@
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Python cache and bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Environment files (credentials)
+.env
+
+# mitmproxy outputs and capture data
+mitm_capture/captured_flows.json
+*.h5
+*.har
+
+# IDE settings
+.vscode/
+.idea/
