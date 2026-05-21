@@ -151,6 +151,37 @@ finalizadas = client.get_bet_history(
 - `events`: `List[BetHistoryEvent]` — sumário dos eventos presentes nas apostas
 - `scores`: `List` — placares (array vazio se não houver resultados)
 
+### 5. Detalhes de um Bilhete (`get_bet_details`)
+Retorna informações detalhadas de um bilhete específico, incluindo todas as seleções, odds atuais e status de cashout.
+
+```python
+detalhes = client.get_bet_details(ticket_id="NSBNAC000146820171779306048382")
+print(f"Status: {detalhes['status']}")
+print(f"Cashout disponível: {detalhes['cashout_available']}")
+print(f"Retorno potencial: R$ {detalhes['potential_return']}")
+for sel in detalhes["selections"]:
+    print(f"  {sel['home']} vs {sel['away']} | {sel['outcome_name']} | Odd: {sel['current_odd']}")
+```
+
+### 6. Cashout de um Bilhete (`cashout`)
+Envia uma solicitação de cashout (encerramento antecipado) de um bilhete ativo.
+
+```python
+# Primeiro obtenha os detalhes do bilhete para ver o status
+detalhes = client.get_bet_details(ticket_id="NSBNAC000146820171779306048382")
+
+if detalhes["cashout_available"]:
+    # O valor de cashout é exibido na interface; informe o valor desejado
+    resultado = client.cashout(
+        ticket_id="NSBNAC000146820171779306048382",
+        total_cashout=0.90  # valor do cashout oferecido pela casa
+    )
+    if resultado["success"]:
+        print(f"Cashout realizado! Valor: R$ {resultado['cashout_amount']}")
+    else:
+        print(f"Falha no cashout: {resultado['message']}")
+```
+
 ---
 
 ## 🏃 Executando os Exemplos

@@ -148,6 +148,134 @@ class BetnacionalClient:
             scores=raw.get("scores", [])
         )
 
+    def get_bet_details(self, ticket_id: str) -> dict:
+        """
+        Retrieves detailed information about a specific ticket, grouped by ticket_id.
+
+        Args:
+            ticket_id: The ticket ID (e.g., "NSBNAC000146820171779306048382").
+
+        Returns:
+            Dict with 'ticket_id', 'header_id', 'stake', 'total_odd', 'potential_return',
+            'status', 'cashout_available', 'created_at', 'selections' (list of per-match details),
+            and 'raw_selections' (raw API data for cashout payload construction).
+        """
+        from datetime import date as dt_date, timedelta
+
+        date_start = (dt_date.today() - timedelta(days=30)).isoformat()
+        date_end = dt_date.today().isoformat()
+
+        endpoint = "/api/v2/pending-bets"
+        params = (
+            f"?status=pending&paginationDirection=next&limit=50"
+            f"&date_start={date_start}&date_end={date_end}"
+            f"&startDate={date_start}&endDate={date_end}"
+        )
+
+        base = "https://prod-betnacional-bets.bet6.com.br"
+        url = f"{base}{endpoint}{params}"
+        raw = self._request("GET", url)
+
+        bets = raw.get("bets", [])
+        ticket_bets = [b for b in bets if b.get("ticket_id") == ticket_id]
+
+        if not ticket_bets:
+            return {"ticket_id": ticket_id, "found": False, "selections": []}
+
+        header = ticket_bets[0]
+        selections = []
+        for b in ticket_bets:
+            selections.append({
+                "event_id": b.get("event_id"),
+                "home": b.get("home"),
+                "away": b.get("away"),
+                "market_name": b.get("market_name"),
+                "outcome_name": b.get("outcome_name"),
+                "odd": b.get("odd"),
+                "current_odd": b.get("current_odd"),
+                "sr_event_odd_id": b.get("sr_event_odd_id"),
+            })
+
+        return {
+            "ticket_id": ticket_id,
+            "found": True,
+            "header_id": header.get("header_id"),
+            "stake": header.get("header_stake"),
+            "total_odd": header.get("total_odd"),
+            "potential_return": header.get("header_return"),
+            "status": header.get("bet_status_name"),
+            "cashout_available": header.get("cashout_status") == 1,
+            "created_at": header.get("created_at"),
+            "selections": selections,
+            "raw_selections": ticket_bets
+        }
+
+    def cashout(self, ticket_id: str, total_cashout: float) -> dict:
+        """
+        Attempts to cash out a specific ticket.
+
+        Args:
+            ticket_id: The ticket ID (e.g., "NSBNAC000146820171779316250168").
+            total_cashout: The cashout amount to accept (pass 0 to accept any offered amount).
+
+        Returns:
+            Dict with 'success', 'message', and optionally 'cashout_amount'.
+        """
+        details = self.get_bet_details(ticket_id)
+        if not details.get("found"):
+            return {"success": False, "message": f"Ticket {ticket_id} not found in pending bets."}
+        if not details.get("cashout_available"):
+            return {"success": False, "message": "Cashout not available for this ticket."}
+
+        raw_selections = details["raw_selections"]
+        header_id = details["header_id"]
+
+        payload = {
+            "ticket_id": ticket_id,
+            "id": header_id,
+            "total_cashout": total_cashout,
+            "evs": 0,
+            "selections": [
+                {
+                    "return_type_id": s.get("return_type_id"),
+                    "event_id": s.get("event_id"),
+                    "event_status_id": s.get("event_status_id") or 0,
+                    "event_date": s.get("event_date") or "0001-01-01T00:00:00",
+                    "sport_id": s.get("sport_id"),
+                    "market_id": s.get("market_id"),
+                    "cashout_status": s.get("cashout_status") or 1,
+                    "probabilities": s.get("current_probability") or s.get("probabilities") or 0,
+                    "booked": s.get("booked") or 0,
+                    "outcome": str(s.get("outcome_id")),
+                    "specifier": s.get("specifier") or "",
+                    "odd": s.get("current_odd") or s.get("odd"),
+                    "original_odd": s.get("odd"),
+                    "signature": s.get("signature"),
+                    "signed_at": s.get("signed_at"),
+                    "signed_at_ts": s.get("signed_at_ts")
+                }
+                for s in raw_selections
+            ],
+            "page": "/bets"
+        }
+
+        url = "https://prod-betnacional-bets.bet6.com.br/api/v1/cash-out"
+        raw = self._request("POST", url, json_data=payload)
+
+        if isinstance(raw, dict) and raw.get("success"):
+            return {
+                "success": True,
+                "message": "Cashout successful.",
+                "cashout_amount": raw.get("cashout_amount") or total_cashout,
+                "raw": raw
+            }
+
+        return {
+            "success": False,
+            "message": str(raw),
+            "raw": raw
+        }
+
     def get_championship_matches(self, tournament_id: int) -> List[Match]:
         """
         Retrieves matches and odds for a specific championship by tournament ID.

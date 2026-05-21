@@ -102,3 +102,23 @@ def get_bet_history(
     except Exception as e:
         logger.error(f"Error fetching bet history: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/bets/details")
+def get_bet_details(ticket_id: str):
+    try:
+        sdk_client = get_client()
+        result = sdk_client.get_bet_details(ticket_id=ticket_id)
+        return result
+    except Exception as e:
+        logger.error(f"Error fetching bet details: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.post("/bets/cashout")
+def cashout_bet(ticket_id: str, total_cashout: float = 0):
+    try:
+        sdk_client = get_client()
+        result = sdk_client.cashout(ticket_id=ticket_id, total_cashout=total_cashout)
+        return result
+    except Exception as e:
+        logger.error(f"Error executing cashout: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
