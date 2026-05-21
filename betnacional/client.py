@@ -9,7 +9,7 @@ from betnacional.parser import DataParser
 from betnacional.config import Config
 from betnacional.models.auth import UserProfile
 from betnacional.models.odds import Match
-from betnacional.models.bet import PlaceBetResponse, BetSelection
+from betnacional.models.bet import PlaceBetResponse, BetSelection, BetHistoryResponse, BetHistoryItem, BetHistoryEvent
 
 logger = logging.getLogger("betnacional.client")
 
@@ -98,6 +98,55 @@ class BetnacionalClient:
         """Helper method to quickly retrieve the user's balance."""
         profile = self.get_profile()
         return profile.balance
+
+    def get_bet_history(
+        self,
+        status: str = "pending",
+        date_start: str = None,
+        date_end: str = None,
+        limit: int = 20,
+        pagination_direction: str = "next"
+    ) -> BetHistoryResponse:
+        """
+        Retrieves the user's bet history from the platform.
+
+        Args:
+            status: "pending" for open bets, "completed" for settled bets.
+            date_start: Start date in YYYY-MM-DD format.
+            date_end: End date in YYYY-MM-DD format.
+            limit: Number of records per page.
+            pagination_direction: Pagination direction ("next").
+
+        Returns:
+            BetHistoryResponse containing bets, events, and scores.
+        """
+        from datetime import date as dt_date, timedelta
+
+        if date_start is None:
+            date_start = (dt_date.today() - timedelta(days=30)).isoformat()
+        if date_end is None:
+            date_end = dt_date.today().isoformat()
+
+        endpoint = "/api/v2/pending-bets" if status == "pending" else "/api/v2/settled-bets"
+        params = (
+            f"?status={'pending' if status == 'pending' else 'completed'}"
+            f"&paginationDirection={pagination_direction}"
+            f"&limit={limit}"
+            f"&date_start={date_start}"
+            f"&date_end={date_end}"
+            f"&startDate={date_start}"
+            f"&endDate={date_end}"
+        )
+
+        base = "https://prod-betnacional-bets.bet6.com.br"
+        url = f"{base}{endpoint}{params}"
+
+        raw = self._request("GET", url)
+        return BetHistoryResponse(
+            bets=[BetHistoryItem(**b) for b in raw.get("bets", [])],
+            events=[BetHistoryEvent(**e) for e in raw.get("events", [])],
+            scores=raw.get("scores", [])
+        )
 
     def get_championship_matches(self, tournament_id: int) -> List[Match]:
         """

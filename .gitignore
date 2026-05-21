@@ -16,6 +16,10 @@ __pycache__/
 
 # mitmproxy outputs and capture data
 mitm_capture/captured_flows.json
+mitm_capture/history_flows.json
+mitm_capture/history_cookies.json
+mitm_capture/mitmproxy.log
+mitm_capture/cookies.json
 *.h5
 *.har
 

@@ -78,3 +78,27 @@ def place_bet(payload: BetRequest):
     except Exception as e:
         logger.error(f"Error placing bet: {e}")
         raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/bets/history")
+def get_bet_history(
+    status: str = "pending",
+    date_start: str = None,
+    date_end: str = None,
+    limit: int = 20
+):
+    try:
+        sdk_client = get_client()
+        result = sdk_client.get_bet_history(
+            status=status,
+            date_start=date_start,
+            date_end=date_end,
+            limit=limit
+        )
+        return {
+            "bets": [b.model_dump() for b in result.bets],
+            "events": [e.model_dump() for e in result.events],
+            "scores": result.scores
+        }
+    except Exception as e:
+        logger.error(f"Error fetching bet history: {e}")
+        raise HTTPException(status_code=500, detail=str(e))

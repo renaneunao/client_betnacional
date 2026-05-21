@@ -115,6 +115,42 @@ else:
     print(f"Erro ao apostar: {resposta.message}")
 ```
 
+### 4. Consultar Histórico de Apostas (`get_bet_history`)
+Retorna as apostas do usuário com filtro por status e período. O método consulta o endpoint `/api/v2/pending-bets` (pendentes) ou `/api/v2/settled-bets` (finalizadas).
+
+```python
+# Buscar apostas pendentes nos últimos 7 dias
+historico = client.get_bet_history(
+    status="pending",
+    date_start="2026-05-13",
+    date_end="2026-05-20"
+)
+
+for bet in historico.bets:
+    print(f"[{bet.ticket_id}] {bet.home} vs {bet.away} | {bet.outcome_name} | Odd: {bet.odd} | Status: {bet.bet_status_name}")
+
+# Buscar apostas finalizadas
+finalizadas = client.get_bet_history(
+    status="completed",
+    date_start="2026-01-01",
+    date_end="2026-05-20"
+)
+```
+
+**Parâmetros:**
+| Parâmetro | Tipo | Padrão | Descrição |
+|---|---|---|---|
+| `status` | `str` | `"pending"` | `"pending"` para apostas abertas, `"completed"` para finalizadas |
+| `date_start` | `str` | 30 dias atrás | Data inicial no formato `YYYY-MM-DD` |
+| `date_end` | `str` | hoje | Data final no formato `YYYY-MM-DD` |
+| `limit` | `int` | `20` | Limite de registros por página |
+| `pagination_direction` | `str` | `"next"` | Direção da paginação |
+
+**Retorno:** `BetHistoryResponse` contendo:
+- `bets`: `List[BetHistoryItem]` — cada seleção de aposta individual
+- `events`: `List[BetHistoryEvent]` — sumário dos eventos presentes nas apostas
+- `scores`: `List` — placares (array vazio se não houver resultados)
+
 ---
 
 ## 🏃 Executando os Exemplos
