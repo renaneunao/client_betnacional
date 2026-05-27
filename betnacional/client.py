@@ -184,7 +184,13 @@ class BetnacionalClient:
 
         header = ticket_bets[0]
         selections = []
+
+        cashout_product = 1.0
         for b in ticket_bets:
+            prob = b.get("current_probability") or b.get("probabilities") or 0
+            if prob > 0:
+                cashout_product *= prob
+
             selections.append({
                 "event_id": b.get("event_id"),
                 "home": b.get("home"),
@@ -193,8 +199,13 @@ class BetnacionalClient:
                 "outcome_name": b.get("outcome_name"),
                 "odd": b.get("odd"),
                 "current_odd": b.get("current_odd"),
+                "current_probability": prob,
                 "sr_event_odd_id": b.get("sr_event_odd_id"),
             })
+
+        stake = float(header.get("header_stake", 0))
+        total_odd = float(header.get("total_odd", 0))
+        cashout_estimate = round(stake * total_odd * cashout_product, 2)
 
         return {
             "ticket_id": ticket_id,
@@ -205,6 +216,7 @@ class BetnacionalClient:
             "potential_return": header.get("header_return"),
             "status": header.get("bet_status_name"),
             "cashout_available": header.get("cashout_status") == 1,
+            "cashout_estimate": cashout_estimate,
             "created_at": header.get("created_at"),
             "selections": selections,
             "raw_selections": ticket_bets
@@ -276,12 +288,12 @@ class BetnacionalClient:
             "raw": raw
         }
 
-    def get_championship_matches(self, tournament_id: int) -> List[Match]:
+    def get_championship_matches(self, tournament_id: int, league_name: str = "") -> List[Match]:
         """
         Retrieves matches and odds for a specific championship by tournament ID.
         Uses headless Playwright scraping to bypass WebSocket restriction.
         """
-        return self.scraper.scrape_championship_matches(tournament_id)
+        return self.scraper.scrape_championship_matches(tournament_id, league_name)
 
     def _submit_and_poll_bet(
         self, 
@@ -459,32 +471,39 @@ class BetnacionalClient:
             bet_type_id=2  # 2 represents a Multiple bet
         )
 
-    def listar_jogos_rodada_brasileirao(self) -> List[Match]:
+    def listar_jogos_rodada_brasileirao(self, tournament_id: int = 325, league_name: str = "") -> List[Match]:
         """
         Lists all upcoming Brasileirão matches available on the platform sorted chronologically.
-        Allows the intelligence to choose any games from the list.
-        """
-        logger.info("Fetching all available Brasileirão matches...")
-        matches = self.get_championship_matches(325)
         
-        # Sort chronologically by start date
+        Args:
+            tournament_id: 325 for Série A, 390 for Série B.
+            league_name: Display name for the league.
+        """
+        league = league_name or ("Brasileirão Série A" if tournament_id == 325 else f"Torneio {tournament_id}")
+        logger.info("Fetching all available %s matches (ID: %d)...", league, tournament_id)
+        matches = self.get_championship_matches(tournament_id, league)
+
         def get_match_date(m: Match) -> datetime:
             if not m.start_time:
                 return datetime.max
             try:
-                # Remove time if present in some formats, parse date
                 date_part = m.start_time.split()[0]
                 return datetime.strptime(date_part, "%d/%m/%Y")
             except Exception:
                 return datetime.max
-                
+
         matches.sort(key=get_match_date)
         return matches
+
+    def listar_jogos_rodada_brasileirao_serie_b(self) -> List[Match]:
+        """Lists all upcoming Brasileirão Série B matches sorted chronologically."""
+        return self.listar_jogos_rodada_brasileirao(tournament_id=390, league_name="Brasileirão Série B")
 
     def multipla_rodada_resultados_brasileirao(
         self,
         choices: List[Dict[str, str]],
-        stake: float
+        stake: float,
+        tournament_id: int = 325
     ) -> PlaceBetResponse:
         """
         Places a parlay/multiple bet using high-level choices.
@@ -492,11 +511,11 @@ class BetnacionalClient:
         Args:
             choices: List of selections: [{"match_id": "...", "choice": "casa" | "empate" | "fora"}]
             stake: Total stake value in BRL
+            tournament_id: 325 for Série A, 390 for Série B.
         """
-        logger.info("Placing parlay bet of %.2f BRL for %d selections...", stake, len(choices))
+        logger.info("Placing parlay bet of %.2f BRL for %d selections (tournament %d)...", stake, len(choices), tournament_id)
         
-        # Fetch current matches to resolve latest odds
-        current_matches = self.get_championship_matches(325)
+        current_matches = self.get_championship_matches(tournament_id)
         match_lookup = {m.id: m for m in current_matches}
         
         # Map human-readable choice to outcome IDs

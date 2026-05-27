@@ -35,6 +35,7 @@ class BetChoice(BaseModel):
 class BetRequest(BaseModel):
     choices: List[BetChoice]
     stake: float
+    tournament_id: int = 325
 
 @app.get("/")
 def read_root():
@@ -51,13 +52,24 @@ def get_balance():
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.get("/matches")
-def get_matches():
+def get_matches(tournament_id: int = 325):
     try:
         sdk_client = get_client()
-        matches = sdk_client.listar_jogos_rodada_brasileirao()
+        league = "Brasileirão Série A" if tournament_id == 325 else "Brasileirão Série B" if tournament_id == 390 else ""
+        matches = sdk_client.listar_jogos_rodada_brasileirao(tournament_id=tournament_id, league_name=league)
         return {"matches": [m.model_dump() for m in matches]}
     except Exception as e:
         logger.error(f"Error fetching matches: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+@app.get("/matches/serie-b")
+def get_matches_serie_b():
+    try:
+        sdk_client = get_client()
+        matches = sdk_client.listar_jogos_rodada_brasileirao_serie_b()
+        return {"matches": [m.model_dump() for m in matches]}
+    except Exception as e:
+        logger.error(f"Error fetching Série B matches: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 @app.post("/bet")
@@ -68,7 +80,8 @@ def place_bet(payload: BetRequest):
         
         result = sdk_client.multipla_rodada_resultados_brasileirao(
             choices=choices_dicts,
-            stake=payload.stake
+            stake=payload.stake,
+            tournament_id=payload.tournament_id
         )
         return {
             "success": result.success,

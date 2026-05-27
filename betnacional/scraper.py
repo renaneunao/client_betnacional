@@ -15,12 +15,13 @@ class ChampionshipScraper:
     def __init__(self, headless: bool = True):
         self.headless = headless
 
-    def scrape_championship_matches(self, tournament_id: int) -> List[Match]:
+    def scrape_championship_matches(self, tournament_id: int, league_name: str = "") -> List[Match]:
         """
         Navigates to the tournament page, waits for elements to render, and parses matches/odds.
         
         Args:
-            tournament_id: The platform ID of the tournament (e.g. 325 for Brasileirão Série A)
+            tournament_id: The platform ID of the tournament (e.g. 325 for Brasileirão Série A, 390 for Série B)
+            league_name: Optional display name for the league. Auto-detected if empty.
             
         Returns:
             A list of Match models populated with their respective odds/outcomes.
@@ -109,7 +110,7 @@ class ChampionshipScraper:
                             awayTeam=away_team,
                             startTime=time_text,
                             sportName="Futebol",
-                            leagueName="Brasileirão Série A",
+                            leagueName=league_name or f"Torneio {tournament_id}",
                             markets=markets
                         ))
                     except Exception as e:
