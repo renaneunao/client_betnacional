@@ -41,6 +41,12 @@ class BetRequest(BaseModel):
 def read_root():
     return {"status": "ok", "app": "betnacional-client-sdk"}
 
+@app.get("/login/status")
+def login_status():
+    if client and client.auth.is_authenticated:
+        return {"authenticated": True, "profile": str(client.auth.user_profile)[:100]}
+    return {"authenticated": False, "message": "Not logged in. POST /login/interactive on a machine with a display to login with MFA."}
+
 @app.get("/balance")
 def get_balance():
     try:

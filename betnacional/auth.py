@@ -89,7 +89,7 @@ class Authenticator:
                 "Referer": keycloak_auth_url
             }
             
-            # Perform POST but do NOT auto-follow redirects (allow_redirects=False) to update Referer at each hop
+            # Perform POST but do NOT auto-follow redirects
             res = self.api.post(
                 form_action,
                 data=login_payload,
@@ -98,7 +98,7 @@ class Authenticator:
                 allow_redirects=False
             )
             
-            # Follow redirect chain manually to simulate browser accurately
+            # Follow redirect chain manually
             steps = 0
             current_res = res
             while current_res.status_code in [301, 302, 303, 307, 308] and steps < 10:
@@ -107,9 +107,14 @@ class Authenticator:
                 if not next_url:
                     break
                 next_url = urljoin(current_res.url, next_url)
-                logger.debug("Redirect %d: %s -> %s", steps, current_res.url, next_url)
                 
-                # Fetch next URL using GET
+                if "required-action" in next_url and "MFA" in next_url:
+                    raise AuthenticationError(
+                        "MFA_REQUIRED: Autenticacao de 2 fatores detectada (NSX-MFA). "
+                        "Use login_interactive() para completar o login no navegador."
+                    )
+                
+                logger.debug("Redirect %d: %s -> %s", steps, current_res.url, next_url)
                 current_res = self.api.get(
                     next_url,
                     headers={"Referer": current_res.url},

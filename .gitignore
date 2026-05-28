@@ -20,6 +20,9 @@ mitm_capture/history_flows.json
 mitm_capture/history_cookies.json
 mitm_capture/mitmproxy.log
 mitm_capture/cookies.json
+
+# Session persistence
+session.json
 *.h5
 *.har
 

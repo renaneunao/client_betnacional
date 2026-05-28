@@ -1,5 +1,7 @@
 import logging
 import time
+import os
+import json
 from datetime import datetime
 from typing import Dict, List, Any, Optional
 from betnacional.api import BaseAPIClient
@@ -12,6 +14,8 @@ from betnacional.models.odds import Match
 from betnacional.models.bet import PlaceBetResponse, BetSelection, BetHistoryResponse, BetHistoryItem, BetHistoryEvent
 
 logger = logging.getLogger("betnacional.client")
+
+SESSION_FILE = os.path.join(os.path.dirname(os.path.dirname(__file__)), "session.json")
 
 class BetnacionalClient:
     """
@@ -32,7 +36,121 @@ class BetnacionalClient:
         Authenticates the user using CPF and Password.
         Uses values from environment variables by default.
         """
-        return self.auth.login(cpf=cpf, password=password)
+        return self.auth.login(cpf=cfp, password=password)
+
+    def login_interactive(self) -> bool:
+        """
+        Opens a real browser window for the user to log in manually.
+        Use this when MFA (2-factor authentication) is required.
+        After login, saves session tokens to session.json for future automated use.
+        """
+        from playwright.sync_api import sync_playwright
+
+        logger.info("Starting interactive login (Playwright browser)...")
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=False, args=["--start-maximized"])
+            context = browser.new_context(
+                no_viewport=True,
+                user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+            )
+            page = context.new_page()
+
+            current_url = [""]
+
+            def on_response(response):
+                url = response.url
+                if "/api/auth/session" in url:
+                    try:
+                        body = response.json()
+                        if body.get("accessToken"):
+                            current_url[0] = url
+                    except Exception:
+                        pass
+
+            page.on("response", on_response)
+            page.goto("https://betnacional.bet.br", wait_until="load")
+
+            print()
+            print("=" * 60)
+            print("  LOGIN INTERATIVO - Complete o login no navegador")
+            print("  (incluindo MFA/codigo se necessario)")
+            print()
+            print("  Feche o navegador quando estiver logado")
+            print("=" * 60)
+            print()
+
+            while True:
+                try:
+                    if not browser.is_connected():
+                        break
+                    page.wait_for_timeout(1000)
+                except Exception:
+                    break
+
+            time.sleep(2)
+
+            try:
+                cookies = context.cookies()
+                self.api.update_cookies({c["name"]: c["value"] for c in cookies})
+            except Exception as e:
+                logger.warning("Could not extract cookies: %s", e)
+
+            session_data = self.api.get("/api/auth/session")
+            if isinstance(session_data, dict) and session_data.get("accessToken"):
+                self.auth.access_token = session_data["accessToken"]
+                self.auth.user_profile = session_data.get("nsxUser") or session_data.get("user")
+                self.auth.is_authenticated = True
+                self.api.session.headers.update({
+                    "Authorization": f"Bearer {self.auth.access_token}",
+                    "nsx-token-version": "v2",
+                    "x-app-client-name": "bet-client",
+                    "x-app-client-version": "6.26.0"
+                })
+                self._save_session()
+                logger.info("Interactive login successful. Session saved.")
+                return True
+
+        logger.error("Interactive login failed.")
+        return False
+
+    def _save_session(self):
+        try:
+            data = {
+                "cookies": self.api.cookies,
+                "access_token": self.auth.access_token,
+                "user_profile": self.auth.user_profile
+            }
+            with open(SESSION_FILE, "w") as f:
+                json.dump(data, f)
+            logger.info("Session saved to %s", SESSION_FILE)
+        except Exception as e:
+            logger.warning("Failed to save session: %s", e)
+
+    def _load_session(self) -> bool:
+        if not os.path.exists(SESSION_FILE):
+            return False
+        try:
+            with open(SESSION_FILE, "r") as f:
+                data = json.load(f)
+            self.api.update_cookies(data.get("cookies", {}))
+            session_data = self.api.get("/api/auth/session")
+            if isinstance(session_data, dict) and session_data.get("accessToken"):
+                self.auth.access_token = session_data["accessToken"]
+                self.auth.user_profile = session_data.get("nsxUser") or session_data.get("user")
+                self.auth.is_authenticated = True
+                self.api.session.headers.update({
+                    "Authorization": f"Bearer {self.auth.access_token}",
+                    "nsx-token-version": "v2",
+                    "x-app-client-name": "bet-client",
+                    "x-app-client-version": "6.26.0"
+                })
+                logger.info("Session loaded from %s", SESSION_FILE)
+                return True
+            logger.info("Saved session expired, removing %s", SESSION_FILE)
+            os.remove(SESSION_FILE)
+        except Exception as e:
+            logger.warning("Failed to load session: %s", e)
+        return False
 
     def get_session_cookies(self) -> Dict[str, str]:
         """Retrieves active session cookies to save for later use."""
@@ -49,10 +167,21 @@ class BetnacionalClient:
         """
         from betnacional.exceptions import HTTPError
         
-        # Ensure initial login is performed if not done yet
         if not self.auth.is_authenticated or not self.auth.access_token:
-            logger.info("Client is not authenticated. Executing automatic login...")
-            self.login()
+            logger.info("Client is not authenticated. Trying saved session...")
+            if self._load_session():
+                logger.info("Session restored from file.")
+            else:
+                logger.info("Executing automatic login...")
+                try:
+                    self.login()
+                except Exception as e:
+                    if "MFA" in str(e).upper() or "REQUIRED-ACTION" in str(e).upper():
+                        raise RuntimeError(
+                            "MFA (autenticacao de 2 fatores) necessaria. "
+                            "Use client.login_interactive() para fazer login manual no navegador."
+                        ) from e
+                    raise
             
         try:
             return self.api.request(method, endpoint, **kwargs)
