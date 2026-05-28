@@ -36,7 +36,7 @@ class BetnacionalClient:
         Authenticates the user using CPF and Password.
         Uses values from environment variables by default.
         """
-        return self.auth.login(cpf=cfp, password=password)
+        return self.auth.login(cpf=cpf, password=password)
 
     def login_interactive(self) -> bool:
         """
