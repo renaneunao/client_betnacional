@@ -75,30 +75,26 @@ class ChampionshipScraper:
                         if time_el.count() > 0:
                             time_text = time_el.first.inner_text().strip()
                         
-                        # 4. Extract Odds (market ID 1 - Resultado Final)
+                        # 4. Extract Odds dynamically (data-testid format changed with RAMP provider)
                         market_id = "1"
                         outcomes = []
                         
-                        # Home odd
-                        odd_1_el = item.locator(f"[data-testid='odd-{event_id}_{market_id}_1_']")
-                        if odd_1_el.count() > 0:
-                            val_text = odd_1_el.first.inner_text().strip()
-                            if val_text:
-                                outcomes.append(OddOutcome(id="1", name=home_team, value=float(val_text)))
-                                
-                        # Draw odd
-                        odd_2_el = item.locator(f"[data-testid='odd-{event_id}_{market_id}_2_']")
-                        if odd_2_el.count() > 0:
-                            val_text = odd_2_el.first.inner_text().strip()
-                            if val_text:
-                                outcomes.append(OddOutcome(id="2", name="Empate", value=float(val_text)))
-                                
-                        # Away odd
-                        odd_3_el = item.locator(f"[data-testid='odd-{event_id}_{market_id}_3_']")
-                        if odd_3_el.count() > 0:
-                            val_text = odd_3_el.first.inner_text().strip()
-                            if val_text:
-                                outcomes.append(OddOutcome(id="3", name=away_team, value=float(val_text)))
+                        odd_elements = item.locator(f"[data-testid^='odd-{event_id}_']").all()
+                        
+                        outcome_names = [home_team, "Empate", away_team]
+                        outcome_ids = ["1", "2", "3"]
+                        
+                        for i, odd_el in enumerate(odd_elements[:3]):
+                            try:
+                                val_text = odd_el.inner_text().strip()
+                                if val_text:
+                                    outcomes.append(OddOutcome(
+                                        id=outcome_ids[i],
+                                        name=outcome_names[i],
+                                        value=float(val_text)
+                                    ))
+                            except Exception:
+                                pass
                         
                         markets = []
                         if outcomes:
